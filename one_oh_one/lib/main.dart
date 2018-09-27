@@ -2,257 +2,257 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'
-    show debugDefaultTargetPlatformOverride;
+	show debugDefaultTargetPlatformOverride;
 
 void main() {
-  debugDefaultTargetPlatformOverride = TargetPlatform.android;
-  _setTargetPlatformForDesktop();
-  runApp(MyApp());
+	debugDefaultTargetPlatformOverride = TargetPlatform.android;
+	_setTargetPlatformForDesktop();
+	runApp(MyApp());
 }
 
 void _setTargetPlatformForDesktop() {
-  TargetPlatform targetPlatform;
-  if (Platform.isMacOS) {
-    targetPlatform = TargetPlatform.iOS;
-  } else if (Platform.isLinux || Platform.isWindows) {
-    targetPlatform = TargetPlatform.android;
-  }
-  if (targetPlatform != null) {
-    debugDefaultTargetPlatformOverride = targetPlatform;
-  }
+	TargetPlatform targetPlatform;
+	if (Platform.isMacOS) {
+		targetPlatform = TargetPlatform.iOS;
+	} else if (Platform.isLinux || Platform.isWindows) {
+		targetPlatform = TargetPlatform.android;
+	}
+	if (targetPlatform != null) {
+		debugDefaultTargetPlatformOverride = targetPlatform;
+	}
 }
 
 class MyApp extends StatelessWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter 101',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(
-          title: 'Flutter 101'
-      ),
-    );
-  }
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			title: 'Flutter 101',
+			theme: ThemeData(
+				primarySwatch: Colors.blue,
+			),
+			home: MyHomePage(
+				title: 'Flutter 101'
+			),
+		);
+	}
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({
-    Key key,
-    this.title
-  }) : super(key: key);
+	MyHomePage({
+		Key key,
+		this.title
+	}) : super(key: key);
 
-  final String title;
+	final String title;
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
+	@override
+	_MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+	int _counter = 0;
 
-  /// /////////////////////////////////////////////////////////
-  ///
-  /// FYI: In dart we don't type out public or private. Instead
-  /// we put an underscore in front of the variable or function
-  /// to marked it as private. So here _incrementCounter() is private.
-  void _incrementCounter() {
+	/// /////////////////////////////////////////////////////////
+	///
+	/// FYI: In dart we don't type out public or private. Instead
+	/// we put an underscore in front of the variable or function
+	/// to marked it as private. So here _incrementCounter() is private.
+	void _incrementCounter() {
 
-    /// This does more than just increment a counter.
-    /// setState() will do what it's told in between the
-    /// braces and then, once done, rebuild the state
-    /// object. This in turn rebuilds the elements of
-    /// the UI, so the UI gets updated.
-    ///
-    /// When you're first learning to read setState functions it
-    /// can help to imagine there's an unwritten "with" that is part
-    /// of the function name. It's kind of like when you add the words
-    /// "in bed" whenever you read a fortune cookie, but not as much
-    /// fun.
-    ///
-    /// Here, it would read "setStateWith _counter++;"
-    setState(() {
-      _counter++;
+		/// This does more than just increment a counter.
+		/// setState() will do what it's told in between the
+		/// braces and then, once done, rebuild the state
+		/// object. This in turn rebuilds the elements of
+		/// the UI, so the UI gets updated.
+		///
+		/// When you're first learning to read setState functions it
+		/// can help to imagine there's an unwritten "with" that is part
+		/// of the function name. It's kind of like when you add the words
+		/// "in bed" whenever you read a fortune cookie, but not as much
+		/// fun.
+		///
+		/// Here, it would read "setStateWith _counter++;"
+		setState(() {
+			_counter++;
 
-      /// It's easy to understand when you can read the words that aren't there!
-    });
-  }
+			/// It's easy to understand when you can read the words that aren't there!
+		});
+	}
 
-  /// This method is run first when createState is run; then rerun every time setState is called.
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-
-
-      /// The Orientation builder allows us to track the screen orientation and build our UI using if statements (outside of the build functions) or ternary operators (inside of the build functions) to decide what widgets to use based on the situation.
-
-      body: OrientationBuilder(
-          builder: (context, orientation) {
-
-            /// Use different Widget trees depending on if the count is over or under 10.
-
-            if (_counter < 11) {
-              return Center(
-                  child: UiForUnder10(
-                      count: _counter,
-                      orientation: orientation
-                  ));
-            } else {
-              return Center(
-                child: UiForOver10(
-                  counter: _counter,
-                  orientation: orientation,
-                ),
-              );
-            }
-          }
-      ),
+	/// This method is run first when createState is run; then rerun every time setState is called.
+	@override
+	Widget build(BuildContext context) {
+		return Scaffold(
+			appBar: AppBar(
+				title: Text(widget.title),
+			),
 
 
-      /// Ye old FAB (Floating Action Button)... need I say more?
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+			/// The Orientation builder allows us to track the screen orientation and build our UI using if statements (outside of the build functions) or ternary operators (inside of the build functions) to decide what widgets to use based on the situation.
+
+			body: OrientationBuilder(
+				builder: (context, orientation) {
+
+					/// Use different Widget trees depending on if the count is over or under 10.
+
+					if (_counter < 11) {
+						return Center(
+							child: UiForUnder10(
+								count: _counter,
+								orientation: orientation
+							));
+					} else {
+						return Center(
+							child: UiForOver10(
+								counter: _counter,
+								orientation: orientation,
+							),
+						);
+					}
+				}
+			),
 
 
-        /// Icons are so easy to use... and look at the cool list right here!
-        child: Icon(Icons.add),
+			/// Ye old FAB (Floating Action Button)... need I say more?
+			floatingActionButton: FloatingActionButton(
+				onPressed: _incrementCounter,
+				tooltip: 'Increment',
 
-      ),
 
-      /// Trailing commas after every closing parenthesis ')' help the formatter keep things nested and easy to read. If you leave them out, the formatter starts putting things on one line and stretching that line out to the right.
-    );
-  }
+				/// Icons are so easy to use... and look at the cool list right here!
+				child: Icon(Icons.add),
+
+			),
+
+			/// Trailing commas after every closing parenthesis ')' help the formatter keep things nested and easy to read. If you leave them out, the formatter starts putting things on one line and stretching that line out to the right.
+		);
+	}
 }
 
 /// This Widget tree is only called if the count is ten or less... obviously.
 class UiForUnder10 extends StatelessWidget {
-  const UiForUnder10({
-    Key key,
-    @required this.count,
-    @required this.orientation,
-  }) : super(key: key);
+	const UiForUnder10({
+		Key key,
+		@required this.count,
+		@required this.orientation,
+	}) : super(key: key);
 
-  final Orientation orientation;
-  final int count;
+	final Orientation orientation;
+	final int count;
 
-  @override
-  Widget build(BuildContext context) {
+	@override
+	Widget build(BuildContext context) {
 
-    /// Containers are relatively expensive. Don't over use them. They have built in code for handling color, size, alignments and more. If all you need to do is make a box of a certain size then use a sized box. Flutter is high performance enough that you can get away with being sloppy and using expensive widgets when simpler ones would have been enough but that's not an excuse for being sloppy. One day you may be working on something complicated enough that you'll have to know how to optimize; so you may as well learn it right from the beginning.
+		/// Containers are relatively expensive. Don't over use them. They have built in code for handling color, size, alignments and more. If all you need to do is make a box of a certain size then use a sized box. Flutter is high performance enough that you can get away with being sloppy and using expensive widgets when simpler ones would have been enough but that's not an excuse for being sloppy. One day you may be working on something complicated enough that you'll have to know how to optimize; so you may as well learn it right from the beginning.
 
-    return Container(
+		return Container(
 
-      /// double.infinity is Flutter speak for "match_parent"
-      width: double.infinity,
-      height: double.infinity,
+			/// double.infinity is Flutter speak for "match_parent"
+			width: double.infinity,
+			height: double.infinity,
 
-      /// Determine our background color based on the orientation of the device
-      color: orientation == Orientation.portrait ?
-      Colors.white :
-      Colors.black,
+			/// Determine our background color based on the orientation of the device
+			color: orientation == Orientation.portrait ?
+			Colors.white :
+			Colors.black,
 
-      child: Column(
+			child: Column(
 
-        /// A column's main axis is vertical. It's cross axis is horizontal.
-        mainAxisAlignment: MainAxisAlignment.center,
+				/// A column's main axis is vertical. It's cross axis is horizontal.
+				mainAxisAlignment: MainAxisAlignment.center,
 
-        /// Columns can have an unlimited number of children.
-        children: <Widget>[
+				/// Columns can have an unlimited number of children.
+				children: <Widget>[
 
-          /// A Center will center your content both horizontally and vertically
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
+					/// A Center will center your content both horizontally and vertically
+					Center(
+						child: Padding(
+							padding: const EdgeInsets.all(16.0),
+							child: Text(
 
-                /// Determine what our text will say based on orientation. We're inside of a build method so a standard if isn't going to work here. We have to use the ternary.
-                orientation == Orientation.portrait
-                    ? 'You have pushed the\nbutton this many times:'
-                    : 'Why does the world look sideways?',
+								/// Determine what our text will say based on orientation. We're inside of a build method so a standard if isn't going to work here. We have to use the ternary.
+								orientation == Orientation.portrait
+									? 'You have pushed the\nbutton this many times:'
+									: 'Why does the world look sideways?',
 
-                /// Determine the text color and size based on orientation
-                style: TextStyle(
+								/// Determine the text color and size based on orientation
+								style: TextStyle(
 
-                    color: orientation == Orientation.portrait ?
-                    Colors.black :
-                    Colors.white,
+									color: orientation == Orientation.portrait ?
+									Colors.black :
+									Colors.white,
 
-                    fontSize: orientation == Orientation.portrait ?
-                    18.0 :
-                    32.0),
-              ),
-            ),
-          ),
+									fontSize: orientation == Orientation.portrait ?
+									18.0 :
+									32.0),
+							),
+						),
+					),
 
-          ///Same thing...
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              orientation == Orientation.portrait ?
-              '$count' :
-              '(and the counter is at $count, by the way)',
-              style:
-              TextStyle(
+					///Same thing...
+					Padding(
+						padding: const EdgeInsets.all(16.0),
+						child: Text(
+							orientation == Orientation.portrait ?
+							'$count' :
+							'(and the counter is at $count, by the way)',
+							style:
+							TextStyle(
 
-                color: orientation == Orientation.portrait ?
-                Colors.black :
-                Colors.white,
+								color: orientation == Orientation.portrait ?
+								Colors.black :
+								Colors.white,
 
-                fontSize: orientation == Orientation.portrait ?
-                32.0 :
-                18.0,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+								fontSize: orientation == Orientation.portrait ?
+								32.0 :
+								18.0,
+							),
+						),
+					),
+				],
+			),
+		);
+	}
 }
 
 
 /// And this is what most production Flutter classes will look like once you take out all of the "training wheels" comments:
 
 class UiForOver10 extends StatelessWidget {
-  const UiForOver10({
-    Key key,
-    @required this.counter,
-    @required this.orientation,
-  }) : super(key: key);
+	const UiForOver10({
+		Key key,
+		@required this.counter,
+		@required this.orientation,
+	}) : super(key: key);
 
-  final Orientation orientation;
-  final int counter;
+	final Orientation orientation;
+	final int counter;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: orientation == Orientation.portrait ?
-      Colors.blue :
-      Colors.red,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            orientation == Orientation.portrait
-                ? "Come on man,\nyou're gonna wear me out!"
-                : "Are you having fun?\nBecause you're beginning to annoy me...",
-            style: TextStyle(
-                color: orientation == Orientation.portrait ?
-                Colors.yellow :
-                Colors.white,
-                fontSize: orientation == Orientation.portrait ? 32.0 :
-                32.0),
-          ),
-        ),
-      ),
-    );
-  }
+	@override
+	Widget build(BuildContext context) {
+		return Container(
+			width: double.infinity,
+			height: double.infinity,
+			color: orientation == Orientation.portrait ?
+			Colors.blue :
+			Colors.red,
+			child: Center(
+				child: Padding(
+					padding: const EdgeInsets.all(16.0),
+					child: Text(
+						orientation == Orientation.portrait
+							? "Come on man,\nyou're gonna wear me out!"
+							: "Are you having fun?\nBecause you're beginning to annoy me...",
+						style: TextStyle(
+							color: orientation == Orientation.portrait ?
+							Colors.yellow :
+							Colors.white,
+							fontSize: orientation == Orientation.portrait ? 32.0 :
+							32.0),
+					),
+				),
+			),
+		);
+	}
 }
