@@ -54,18 +54,18 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   /// /////////////////////////////////////////////////////////
-  /// This does more than just increment a counter.
-  /// setState() will do what it's told in between the
-  /// braces and then, once done, rebuild the state
-  /// object. This in turn rebuilds the elements of
-  /// the UI, so the UI gets updated.
   ///
-  /// FYI: In dart we don't use public or private. Instead
+  /// FYI: In dart we don't type out public or private. Instead
   /// we put an underscore in front of the variable or function
-  /// name and this causes it to be marked as private. So
-  /// here, _incrementCounter() is private.
+  /// to marked it as private. So here _incrementCounter() is private.
   void _incrementCounter() {
 
+    /// This does more than just increment a counter.
+    /// setState() will do what it's told in between the
+    /// braces and then, once done, rebuild the state
+    /// object. This in turn rebuilds the elements of
+    /// the UI, so the UI gets updated.
+    ///
     /// When you're first learning to read setState functions it
     /// can help to imagine there's an unwritten "with" that is part
     /// of the function name. It's kind of like when you add the words
@@ -76,15 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
 
-      /// It's easy to understand when you can read the words that aren't
-      /// really there!
+      /// It's easy to understand when you can read the words that aren't there!
     });
   }
 
-  /// ////////////////////////////////////////////////////////
-
-
-  /// This method is run first when createState is run, then it's rerun every time setState is called.
+  /// This method is run first when createState is run; then rerun every time setState is called.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
 
-      /// Ye old FAB... need I say more?
+      /// Ye old FAB (Floating Action Button)... need I say more?
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
