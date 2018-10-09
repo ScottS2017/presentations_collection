@@ -154,8 +154,8 @@ class UiForUnder10 extends StatelessWidget {
 
 			/// Determine our background color based on the orientation of the device
 			color: orientation == Orientation.portrait ?
-			Colors.white :
-			Colors.black,
+			Colors.purple :
+			Colors.orange,
 
 			child: Column(
 
@@ -235,20 +235,20 @@ class UiForOver10 extends StatelessWidget {
 			width: double.infinity,
 			height: double.infinity,
 			color: orientation == Orientation.portrait ?
-			Colors.blue :
+			Colors.pink :
 			Colors.red,
 			child: Center(
 				child: Padding(
-					padding: const EdgeInsets.all(16.0),
+					padding: const EdgeInsets.all(40.0),
 					child: Text(
 						orientation == Orientation.portrait
 							? "Come on man,\nyou're gonna wear me out!"
 							: "Are you having fun?\nBecause you're beginning to annoy me...",
 						style: TextStyle(
 							color: orientation == Orientation.portrait ?
-							Colors.yellow :
+							Colors.orange :
 							Colors.white,
-							fontSize: orientation == Orientation.portrait ? 32.0 :
+							fontSize: orientation == Orientation.portrait ? 24.0 :
 							32.0),
 					),
 				),
