@@ -10,7 +10,9 @@ class PortraitPage extends StatefulWidget {
 }
 
 class _PortraitPageState extends State<PortraitPage> {
-    int _counter = 0;
+
+    // The fact that this is static and outside the build() is what allows it to persist
+    static int _counter = 0;
 
     void _incrementCounter() {
         setState(() {
