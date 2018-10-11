@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
               child: OrientationBuilder(
                   builder: (context, orientation) {
                       if(counterModel.broken){
-                          numTimesBroke > 3 ? numTimesBroke++ : null;
+                          numTimesBroke < 4 ? numTimesBroke++ : numTimesBroke = 4;
                           return YouBrokeIt(
                               message: numTimesBroke == 1
                                   ? 'You broke it!'
@@ -68,5 +68,22 @@ class MyApp extends StatelessWidget {
             ),
         );
     }
+}
+
+class Texto extends StatelessWidget{
+
+    String text;
+    Texto({
+        this.text,
+}) : super();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Text(text),
+    );
+  }
+
+
 }
 

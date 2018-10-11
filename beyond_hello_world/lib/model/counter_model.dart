@@ -15,8 +15,8 @@ class CounterModel extends Model {
     void increment() {
         // First, increment the counter
         _counterLandscape++;
-        _counterLandscape > 109
-        ? broken = true : null;
+
+        _counterLandscape > 109 ? broken = true : null;
 
         // Then notify all the listeners.
         notifyListeners();
