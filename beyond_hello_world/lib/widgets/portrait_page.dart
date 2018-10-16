@@ -11,9 +11,10 @@ class PortraitPage extends StatefulWidget {
 
 class _PortraitPageState extends State<PortraitPage> {
 
-    // The fact that this is static and outside the build() is what allows it to persist
+    // The fact that this is static and outside the build() is what allows this int to persist
     static int _counter = 0;
 
+    // Here we're looking at setState. The easier way to read this is to add the word "with" after setState. So, in this case, it would read, "Set state WITH an incremented counter."
     void _incrementCounter() {
         setState(() {
             _counter++;
@@ -27,6 +28,8 @@ class _PortraitPageState extends State<PortraitPage> {
                 title: Text(widget.title),
             ),
             body: Center(
+
+                // Pass the UIModule the appropriate information for it to display in Portrait orientation.
                 child: UiModule(
                     counter: _counter,
                     orientation: 'Portrait',
@@ -40,6 +43,8 @@ class _PortraitPageState extends State<PortraitPage> {
                 shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.circular(2.0),
                 ),
+
+                // Here we use the FAB to trigger setState within the PortraitPage tree. Notice how this is all self contained, never reaching outside of it's own class. Whereas ScopedModel can reach anywhere within your app that you put a ScopedModelDescendant because the app has ScopedModel at its base.
                 onPressed: _incrementCounter,
                 tooltip: "Use Set State",
                 child: Center(

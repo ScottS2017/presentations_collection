@@ -15,6 +15,8 @@ class UiModule extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return Container(
+
+            // double.infinity is Flutter speak for match_parent. It means take all the space you're allowed to use. This is an approach that works because in the layout passes, the parent first tells the child how much room it will have to work with. By saying double.infinity, you're telling the child to take it all.
             width: double.infinity,
             height: double.infinity,
             color: Colors.white,

@@ -18,6 +18,10 @@ class LandscapePage extends StatelessWidget {
                 title: Text(title),
             ),
             body: Center(
+
+                // Landscape is where we're demonstrating how to use ScopedModel. ***** Notice that the ScopedModel IS an ancestor of this widget tree, since this tree was called from the tree which had ScopedModel at its base.
+
+                // Here is also we're we're going to pass the UIModule the appropriate information for it to display in Portrait orientation.
                 child: ScopedModelDescendant<CounterModel>(
                     builder: (context, child, model) =>
                         UiModule(
@@ -27,6 +31,8 @@ class LandscapePage extends StatelessWidget {
                         )
                 ),
             ),
+
+            // We're also using the Descendant as the base of the FAB, allowing us to call the increment function within the counterModel instance we created in main.dart
             floatingActionButton: ScopedModelDescendant<CounterModel>(
                 builder: (context, child, counterModel) =>
                     FloatingActionButton(
@@ -39,6 +45,7 @@ class LandscapePage extends StatelessWidget {
                             child: Container(
                                 height: double.infinity,
                                 width: double.infinity,
+                                color: Colors.green,
                                 child: Icon(Icons.add),
                             ),
                         ),

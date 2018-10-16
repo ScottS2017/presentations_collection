@@ -1,4 +1,5 @@
 import 'package:beyond_hello_world/model/counter_model.dart';
+import 'package:beyond_hello_world/widgets/something_good.dart';
 import 'package:flutter/material.dart';
 
 import 'package:beyond_hello_world/app/drop_shadowed_text.dart';
@@ -13,8 +14,11 @@ class YouBrokeIt extends StatelessWidget {
         @required this.message,
     }) : super();
 
+    int timesRotated = 0;
+
     @override
     Widget build(BuildContext context) {
+        timesRotated++;
         return Material(
             child: Container(
                 color: Colors.red,
@@ -52,6 +56,21 @@ class YouBrokeIt extends StatelessWidget {
                                             fontSize: 32.0
                                         ),
                                     ),
+                            ),
+                            SizedBox(
+                                width: 1.0,
+                                height: 25.0,
+                            ),
+                            DropShadowedText(
+                                'Number of times rotated = $timesRotated',
+                                textDirection: TextDirection.ltr,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 32.0
+                                ),
                             ),
                         ],
                     ),
