@@ -5,7 +5,13 @@ import 'package:flutter/foundation.dart'
     show debugDefaultTargetPlatformOverride;
 
 void main() {
+
+    /// This code is an experimental addition that's part of what allows us to run a Flutter app on Windows.
+    /// Set the default DEBUG platform
+
     debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+    /// Check the actual platform and set it accordingly.
     _setTargetPlatformForDesktop();
     runApp(MyApp());
 }
@@ -38,6 +44,7 @@ class MyApp extends StatelessWidget {
     }
 }
 
+/// It's called a StatefulWidget but, in reality, the Widget itself is Stateless. What it does is create the State object, and it's the State object that actually maintains the State.
 class MyHomePage extends StatefulWidget {
     MyHomePage({
         Key key,
@@ -46,6 +53,7 @@ class MyHomePage extends StatefulWidget {
 
     final String title;
 
+    /// You override createState() to give it the constructor for your state object.
     @override
     _MyHomePageState createState() => _MyHomePageState();
 }
@@ -58,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     /// FYI: In dart we don't type out public or private. Instead
     /// we put an underscore in front of the variable or function
     /// to marked it as private. So here _incrementCounter() is private.
+
     void _incrementCounter() {
 
         /// This does more than just increment a counter.
@@ -73,14 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
         /// fun.
         ///
         /// Here, it would read "setStateWith _counter++;"
+
         setState(() {
             _counter++;
-
-            /// It's easy to understand when you can read the words that aren't there!
         });
     }
 
     /// This method is run first when createState is run; then rerun every time setState is called.
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -88,15 +97,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text(widget.title),
             ),
 
-
             /// The Orientation builder allows us to track the screen orientation and build our UI using if statements (outside of the build functions) or ternary operators (inside of the build functions) to decide what widgets to use based on the situation.
 
             body: OrientationBuilder(
                 builder: (context, orientation) {
 
-                    /// Use different Widget trees depending on if the count is over or under 10.
+                    /// What we're going to do here is use a different UI based on if the counter is over or under 10.
+                    /// ****** We can use a regular if statement because we're inside of a function. You can't do this for the parameter of a constructor. Instead, you can either call a function that returns the parameter or you can use ternary operators (inline ifs) to make decisions about what parameters will be used.
 
-                    if (_counter < 11) {
+                    if (_counter <= 10) {
                         return Center(
                             child: UiForUnder10(
                                 count: _counter,
@@ -113,24 +122,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
             ),
 
-
             /// Ye old FAB (Floating Action Button)... need I say more?
+
             floatingActionButton: FloatingActionButton(
                 onPressed: _incrementCounter,
                 tooltip: 'Increment',
 
 
                 /// Icons are so easy to use... and look at the cool list right here!
+
                 child: Icon(Icons.add),
 
-            ),
+                /// Trailing commas after every closing parenthesis ')' help the formatter keep things nested and easy to read. If you leave them out, the formatter starts putting things on one line and stretching that line out to the right.
 
-            /// Trailing commas after every closing parenthesis ')' help the formatter keep things nested and easy to read. If you leave them out, the formatter starts putting things on one line and stretching that line out to the right.
+            ),
         );
     }
 }
 
 /// This Widget tree is only called if the count is ten or less... obviously.
+
 class UiForUnder10 extends StatelessWidget {
     const UiForUnder10({
         Key key,
@@ -149,64 +160,75 @@ class UiForUnder10 extends StatelessWidget {
         return Container(
 
             /// double.infinity is Flutter speak for "match_parent"
+
             width: double.infinity,
             height: double.infinity,
 
             /// Determine our background color based on the orientation of the device
-            color: orientation == Orientation.portrait ?
-            Colors.purple :
-            Colors.orange,
+
+            color: orientation == Orientation.portrait
+                ? Colors.white
+                : Colors.black,
 
             child: Column(
 
                 /// A column's main axis is vertical. It's cross axis is horizontal.
+
                 mainAxisAlignment: MainAxisAlignment.center,
 
                 /// Columns can have an unlimited number of children.
+
                 children: <Widget>[
 
                     /// A Center will center your content both horizontally and vertically
+
                     Center(
                         child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
 
                                 /// Determine what our text will say based on orientation. We're inside of a build method so a standard if isn't going to work here. We have to use the ternary.
+
                                 orientation == Orientation.portrait
                                     ? 'You have pushed the\nbutton this many times:'
                                     : 'Why does the world look sideways?',
 
                                 /// Determine the text color and size based on orientation
+
                                 style: TextStyle(
 
-                                    color: orientation == Orientation.portrait ?
-                                    Colors.black :
-                                    Colors.white,
+                                    color: orientation == Orientation.portrait
+                                        ? Colors.black
+                                        : Colors.white,
 
-                                    fontSize: orientation == Orientation.portrait ?
-                                    18.0 :
-                                    32.0),
+                                    fontSize: orientation == Orientation.portrait
+                                        ? 18.0
+                                        : 32.0),
                             ),
                         ),
                     ),
 
                     ///Same thing...
+
                     Padding(
                         padding: const EdgeInsets.all(16.0),
+
+                        /// Set our text string
+
                         child: Text(
                             orientation == Orientation.portrait ?
                             '$count' :
                             '(and the counter is at $count, by the way)',
-                            style:
-                            TextStyle(
 
+                            /// We don't have to set a text style but when we do, it's pretty similar to how you do it in CSS.
+
+                            style: TextStyle(
                                 color: orientation == Orientation.portrait ?
                                 Colors.black :
                                 Colors.white,
-
-                                fontSize: orientation == Orientation.portrait ?
-                                32.0 :
-                                18.0,
+                                fontSize: orientation == Orientation.portrait
+                                    ? 32.0
+                                    : 18.0,
                             ),
                         ),
                     ),
@@ -215,7 +237,6 @@ class UiForUnder10 extends StatelessWidget {
         );
     }
 }
-
 
 /// And this is what most production Flutter classes will look like once you take out all of the "training wheels" comments:
 
@@ -235,8 +256,8 @@ class UiForOver10 extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             color: orientation == Orientation.portrait ?
-            Colors.pink :
-            Colors.red,
+            Colors.red :
+            Colors.blue,
             child: Center(
                 child: Padding(
                     padding: const EdgeInsets.all(40.0),
@@ -246,8 +267,8 @@ class UiForOver10 extends StatelessWidget {
                             : "Are you having fun?\nBecause you're beginning to annoy me...",
                         style: TextStyle(
                             color: orientation == Orientation.portrait ?
-                            Colors.orange :
-                            Colors.white,
+                            Colors.black :
+                            Colors.yellow,
                             fontSize: orientation == Orientation.portrait ? 24.0 :
                             32.0),
                     ),
